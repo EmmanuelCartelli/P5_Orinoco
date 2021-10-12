@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;1,700&display=swap');
+
+
+body{
+    width: 90rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+h2, h3, h4{
+    font-family: 'Roboto Mono';
+}
+
+p, span{
+    font-family: 'Roboto';
+}
+
+.link
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+img{
+    width: 100%;
+}

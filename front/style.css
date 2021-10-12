@@ -1,3 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;1,700&display=swap');
+
+body{
+    width: 90rem;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    background: black;
+}
+nav{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+nav a{
+    padding: 2rem;
+    width: fit-content;
+    width: -moz-fit-content;
+    margin: auto;
+    color: white;;
+}
+h2, h3, h4, a{
+    font-family: 'Roboto Mono';
+}
+
+p, span{
+    font-family: 'Roboto';
+}
 main{
     display: grid;
 }
@@ -8,12 +40,9 @@ img{
     object-fit: cover;
 }
 
-@media (min-width: 1025px){
-    main{
-        grid-template-columns: repeat(3, 1fr);
-        width: 90rem;
-        max-width: 100%;
-        padding: 2rem;
-        gap: 2rem;
-    }
+main{
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem;
+    gap: 2rem;
+    max-width: 100%;
 }

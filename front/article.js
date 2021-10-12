@@ -32,23 +32,51 @@ function displayArticle(articles){
 
 }
 
+
+function pushTotal(articlePrice){
+    let sum = 0;
+    let total = JSON.parse(localStorage.getItem("panier"));
+    if(localStorage.getItem("total")){
+        for(i of total){
+            sum += i.price;
+        }
+        localStorage.setItem("total", sum);
+    }
+    else{
+        sum += articlePrice.price / 100;
+        localStorage.setItem("total", sum);
+    }
+}
+
+function pushStorage(article){
+    let articleArray = []
+    document.querySelector("button").addEventListener("click", function(){
+        let cameraOption = document.querySelector("select").value;
+        let camera = {
+            name : article.name,
+            option : cameraOption,
+            price : article.price / 100
+        }
+        if(localStorage.getItem("panier")){
+            let array = JSON.parse(localStorage.getItem("panier"));
+            console.log(array);
+            array.push(camera);
+            localStorage.setItem("panier", JSON.stringify(array));
+        }
+        else{
+            articleArray.push(camera);
+            localStorage.setItem("panier", JSON.stringify(articleArray));
+        }
+        pushTotal(article);
+    })
+}
+
+
 async function main(){
     let id = getId();
     let article = await getArticle(id);
     displayArticle(article);
+    pushStorage(article);
 }
 
 main();
-
-
- let prout = function postProduct(){
-    let maVoiture = {
-        make: 'Ford',
-        model: 'Mustang',
-        year: 1969
-      };
-      localStorage.setItem('Car', JSON.stringify(maVoiture));
-}
-
-const btn = document.querySelector("button");
-btn.addEventListener("click", prout);
