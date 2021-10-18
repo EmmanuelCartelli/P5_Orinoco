@@ -48,6 +48,15 @@ function pushTotal(articlePrice){
     }
 }
 
+function checkArray(array, itemName, itemOption){
+    for(x of array){
+        if(x.name == itemName && x.option == itemOption){
+            x.quantity++;
+            return true;
+        }
+    }
+}
+
 function pushStorage(article){
     let articleArray = []
     document.querySelector("button").addEventListener("click", function(){
@@ -55,13 +64,18 @@ function pushStorage(article){
         let camera = {
             name : article.name,
             option : cameraOption,
-            price : article.price / 100
+            price : article.price / 100,
+            quantity: 1
         }
         if(localStorage.getItem("panier")){
             let array = JSON.parse(localStorage.getItem("panier"));
-            console.log(array);
-            array.push(camera);
-            localStorage.setItem("panier", JSON.stringify(array));
+            if(checkArray(array, camera.name, camera.option)){
+                localStorage.setItem("panier", JSON.stringify(array));
+            }
+            else{
+                array.push(camera);
+                localStorage.setItem("panier", JSON.stringify(array));
+            }
         }
         else{
             articleArray.push(camera);
