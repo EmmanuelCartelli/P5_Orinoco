@@ -62,7 +62,9 @@ function pushStorage(article){
     document.querySelector("button").addEventListener("click", function(){
         let cameraOption = document.querySelector("select").value;
         let camera = {
+            id : article._id,
             name : article.name,
+            img : article.imageUrl,
             option : cameraOption,
             price : article.price / 100,
             quantity: 1
@@ -84,7 +86,6 @@ function pushStorage(article){
         pushTotal(article);
     })
 }
-
 
 async function main(){
     let id = getId();

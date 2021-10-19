@@ -1,21 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="panier.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-<header>
-    <div>
-    </div>
-    <nav>
-        <a>Accueil</a>
-        <a>Produits</a>
-        <a aria-label="panier">Panier</a>
-    </nav>
-</header>
+    <header>
+        <div>
+        </div>
+        <nav>
+            <a href="index.html">Accueil</a>
+            <a>Produits</a>
+            <a aria-label="panier" href="panier.html">Panier</a>
+        </nav>
+    </header>
+    <main>
+        <section class="panier">
+            <h1>Votre Panier</h1>
+            <div class="grid-container">
+                <template>
+                    <div class="card">
+                        <div>
+                            <img>
+                        </div>
+                        <div>
+                            <h3></h3>
+                            <p></p>
+                        </div>
+                        <div class="controller">
+                            <button>-</button>
+                            <input type="number">
+                            <button>+</button>
+                        </div>
+                        <div class="price">
+                            <h4></h4>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </section>
+        <section class="total"></section>
+    </main>
     <script src="panier.js"></script>
 </body>
 </html>
