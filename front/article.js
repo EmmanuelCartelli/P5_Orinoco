@@ -71,13 +71,24 @@ function pushStorage(article){
         }
         if(localStorage.getItem("panier")){
             let array = JSON.parse(localStorage.getItem("panier"));
-            if(checkArray(array, camera.name, camera.option)){
+            /*if(checkArray(array, camera.name, camera.option)){
                 localStorage.setItem("panier", JSON.stringify(array));
             }
             else{
                 array.push(camera);
                 localStorage.setItem("panier", JSON.stringify(array));
+            }*/
+            let z = array.length;
+
+            for(i = 0; i < z; i++){
+                if(camera.option === array[i].option && camera.name === array[i].name){
+                    array[i].quantity++;
+                    localStorage.setItem("panier", JSON.stringify(array));
+                    return;
+                } 
             }
+            array.push(camera);
+            localStorage.setItem("panier", JSON.stringify(array));
         }
         else{
             articleArray.push(camera);
@@ -86,6 +97,7 @@ function pushStorage(article){
         pushTotal(article);
     })
 }
+
 
 async function main(){
     let id = getId();

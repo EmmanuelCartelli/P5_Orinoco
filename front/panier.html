@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <link rel="stylesheet" href="panier.css">
     <meta charset="UTF-8">
@@ -42,7 +42,24 @@
                 </template>
             </div>
         </section>
-        <section class="total"></section>
+        <section class="checkout">
+            <form>
+                <div class="name">
+                    <input type="text" placeholder="Nom" name="Nom" data-type="text">
+                    <input type="text" placeholder="Prénom" name="Prénom" data-type="text">
+                </div>
+                <div>
+                    <input type="email" placeholder="email" name="E-mail" data-type="email">
+                </div>
+                <div>
+                    <input type="text" placeholder="Adresse" data-type="adress">
+                </div>
+                <div>
+                    <input type="text" name="ville" placeholder="Ville" data-type="text">
+                </div>
+                <input type="submit">
+            </form>
+        </section>
     </main>
     <script src="panier.js"></script>
 </body>
