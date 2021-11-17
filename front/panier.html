@@ -31,9 +31,7 @@
                             <p></p>
                         </div>
                         <div class="controller">
-                            <button>-</button>
                             <input type="number">
-                            <button>+</button>
                         </div>
                         <div class="price">
                             <h4></h4>
@@ -45,19 +43,17 @@
         <section class="checkout">
             <form>
                 <div class="name">
-                    <input type="text" placeholder="Nom" name="Nom" data-type="text">
-                    <input type="text" placeholder="Prénom" name="Prénom" data-type="text">
+                    <input type="text" placeholder="Nom" name="Nom" class="firstname">
+                    <input type="text" placeholder="Prénom" name="Prénom" class="lastname">
                 </div>
                 <div>
-                    <input type="email" placeholder="email" name="E-mail" data-type="email">
+                    <input type="email" placeholder="email" name="E-mail" class="email">
+                    <input type="text" placeholder="Adresse" class="adress">
                 </div>
                 <div>
-                    <input type="text" placeholder="Adresse" data-type="adress">
+                    <input type="text" name="ville" placeholder="Ville" class="city">
                 </div>
-                <div>
-                    <input type="text" name="ville" placeholder="Ville" data-type="text">
-                </div>
-                <input type="submit">
+                <input type="submit" class="send">
             </form>
         </section>
     </main>

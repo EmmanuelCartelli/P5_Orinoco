@@ -21,27 +21,76 @@ function displayProducts(product){
     document.querySelector(".grid-container").appendChild(clone);
 }
 
-let input = document.querySelector("input").value;
-let dataFormat = document.querySelector(input).getAttribute("data-type");
-
-function checkFormValidity(input, dataFormat){
-    const letterFormat = /^[a-zA-Z\-]+$/;
-    const adressFormat = /^[a-zA-Z0-9\s,.'-]{3,}$/;
-    const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(input.match(letterFormat) && dataFormat == "text"){
+function checkRegex(regex, input){
+    if(regex.test(input)){
         return true;
-    }
-    else if(input.match(adressFormat) && dataFormat == "adress"){
-        return true;
-
-    }
-    else if(input.match(mailFormat)&& dataFormat == "email"){
-        return true;
-
     }
     else{
         return false;
     }
+}
+
+
+function listenForm(){
+    let submitBtn = document.querySelector(".send");
+    const letterFormat = /^[a-zA-ZéêèàëÉÈÊË\-]+$/;
+    const adressFormat = /^[a-zA-ZéêèàëÉÈÊË0-9\s,.'-]{3,}$/;
+    const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+    let mail = document.querySelector(".email");
+    let adress = document.querySelector(".adress");
+    let city = document.querySelector(".city");
+    let nameInput = document.querySelector(".firstname");
+    let lastname = document.querySelector(".lastname");
+    console.log(nameInput);
+    submitBtn.addEventListener("click", function(e){
+        e.preventDefault();
+        if(checkRegex(letterFormat, nameInput.value) 
+        && checkRegex(letterFormat, lastname.value) 
+        && checkRegex(adressFormat, adress.value) 
+        && checkRegex(adressFormat, city.value) 
+        && checkRegex(mailFormat, mail.value)){
+            //post method
+            console.log("ok");
+            let product = [];
+            let storage = JSON.parse(localStorage.getItem("panier"));
+            console.log(storage);   
+            for(i of storage){
+                product.push(i.id);
+            }    
+            console.log(product);
+            let order = {
+                contact: {
+                    firstName: nameInput.value,
+                    lastName: lastname.value,
+                    address: adress.value,
+                    city: city.value,
+                    email: mail.value,
+                },
+                products : product,
+            }
+            console.log(order);
+            const options = {
+                method: "POST",
+                body: JSON.stringify(order),
+                headers: {
+                    'Accept': 'application/json',
+                    "Content-Type": "application/json"
+                },
+            }
+            fetch("http://localhost:3000/api/cameras/order", options)
+            .then(response => response.json())
+            .then(data => {
+                localStorage.clear();
+                localStorage.setItem("orderID", data.orderId);
+                window.location.href = "confirmation.html";
+            })
+            .catch(error => console.error(error));
+        }
+        else{
+            e.preventDefault();
+            alert("Veuillez remplir correctement tous les champs");
+        }
+    });
 }
 
 function main(){
@@ -49,6 +98,7 @@ function main(){
     for(i of array){
         displayProducts(i);
     }
+    listenForm();
 }
 
 main();
