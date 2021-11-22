@@ -57,7 +57,7 @@ function checkArray(array, itemName, itemOption){
     }
 }
 
-function pushStorage(article){
+function addToCart(article){
     let articleArray = []
     document.querySelector("button").addEventListener("click", function(){
         let cameraOption = document.querySelector("select").value;
@@ -103,7 +103,7 @@ async function main(){
     let id = getId();
     let article = await getArticle(id);
     displayArticle(article);
-    pushStorage(article);
+    addToCart(article);
 }
 
 main();

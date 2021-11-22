@@ -99,6 +99,11 @@ function main(){
         displayProducts(i);
     }
     listenForm();
+
+    document.querySelector(".delete").addEventListener("click", function(){
+        localStorage.clear();
+        window.location.href = "index.html";
+    });
 }
 
 main();

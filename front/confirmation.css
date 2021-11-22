@@ -1,0 +1,18 @@
+.infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.infos a {
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    color: white;
+}
+
+footer {
+    padding: 1rem;
+    background: black;
+}
+
+footer h2 {
+    color: white;
+}

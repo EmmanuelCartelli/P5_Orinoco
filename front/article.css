@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;1,700&display=swap');
 
-
 body{
-    max-width: 100%;
+    max-width: 90rem;
     margin: 0 auto;
 }
 header{
@@ -34,7 +33,6 @@ p, span{
 .link
 {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     padding: 2rem;
 }
@@ -83,6 +81,25 @@ button {
     margin-top: 2rem;
     color: white;
     cursor: pointer;
+}
+
+.infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.infos a {
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    color: white;
+}
+
+footer {
+    padding: 1rem;
+    background: black;
+}
+
+footer h2 {
+    color: white;
 }
 
 @media screen and (max-width: 1024px) {

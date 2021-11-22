@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;1,700&display=swap');
 
-html{
-    font-size: 82%;
-}
-
 body{
     margin: 0;
-    max-width: 100%;
+    max-width: 90rem;
+    margin: auto;
 }
 
 header{
@@ -47,7 +44,7 @@ img{
 
 main{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     padding: 2rem;
     gap: 2rem;
     background: #ebebeb;
@@ -56,7 +53,7 @@ main{
 }
 
 .container h2 {
-    grid-area: 1/1/1/5;
+    grid-area: 1/1/1/4;
     background: white;
     padding: 0.5rem 1rem;
     width: fit-content;
@@ -77,6 +74,24 @@ a.link:hover{
     background: #181818;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px 0px;
+}
+.infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.infos a {
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    color: white;
+}
+
+footer {
+    padding: 1rem;
+    background: black;
+}
+
+footer h2 {
+    color: white;
 }
 
 @media screen and (max-width: 1440px){
