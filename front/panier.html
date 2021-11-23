@@ -9,11 +9,8 @@
 </head>
 <body>
     <header>
-        <div>
-        </div>
         <nav>
             <a href="index.html">Accueil</a>
-            <a>Produits</a>
             <a aria-label="panier" href="panier.html">Panier</a>
         </nav>
     </header>
@@ -34,13 +31,16 @@
                             <p></p>
                         </div>
                         <div class="controller">
-                            <input type="number">
+                            <span type="number">Quantité :</span>
                         </div>
                         <div class="price">
-                            <h4></h4>
+                            <h4>Prix en euros: <span></span>€</h4>
                         </div>
                     </div>
                 </template>
+            </div>
+            <div class="totalContainer">
+                <h4>Total : <span class="totalCart"></span>€</h4>
             </div>
         </section>
         <section class="checkout">
@@ -60,6 +60,14 @@
             </form>
         </section>
     </main>
+    <footer>
+        <h2>Orinoco</h2>
+        <div class="infos">
+            <a href="#">Mentions Légales</a>
+            <a href="#">Politique de confidentialité</a>
+            <a href="#">Contact</a>
+        </div>
+    </footer>
     <script src="panier.js"></script>
 </body>
 </html>

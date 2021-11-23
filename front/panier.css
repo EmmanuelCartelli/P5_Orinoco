@@ -7,13 +7,11 @@ body{
     margin: 0 auto;
 }
 header{
-    display: grid;
-    grid-template-columns: 3fr 1fr;
     background: black;
 }
 nav{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 nav a{
     padding: 2rem;
@@ -33,10 +31,7 @@ p, span{
     color: white;
 }
 main{
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    min-height: 75vh;
 }
 .grid-container{
     display: grid;
@@ -66,6 +61,7 @@ main{
 }
 form{
     padding: 2rem;
+    width: 100%;
 }
 form div{
     display: grid;
@@ -106,6 +102,7 @@ input[type="submit"]:hover{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    flex-wrap: wrap;
 }
 
 .infos {
@@ -126,9 +123,49 @@ footer {
 footer h2 {
     color: white;
 }
+.infos a {
+    padding: 0.75rem 0.75rem 0.75rem 0;
+    color: white;
+}
+
+footer {
+    padding: 1rem;
+    background: black;
+}
+
+footer h2 {
+    color: white;
+}
+
+
+section.checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.totalContainer{
+    font-size: 2rem;
+    
+}
+.totalContainer h4{
+    margin-bottom: 0;
+    color: black;
+    background: white;
+    padding: .5rem;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+.totalContainer h4 span{
+    color: black;
+}
 
 @media screen and (max-width: 1030px) {
-    main{
+    .grid-container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 650px) {
+    .grid-container{
         grid-template-columns: 1fr;
     }
 }

@@ -7,6 +7,7 @@ function getBasket(){
         return 0;
     }
 }
+const allPrices = [];
 
 function displayProducts(product){
     const template = document.querySelector("template");
@@ -16,9 +17,17 @@ function displayProducts(product){
     clone.querySelector(".card img").setAttribute("src", product.img)
     clone.querySelector(".card h3").textContent = product.name;
     clone.querySelector(".card p").textContent = product.description;
-    clone.querySelector(".price h4").textContent = total;
-    clone.querySelector(".card input").setAttribute("value", product.quantity);
+    clone.querySelector(".price span").textContent = total;
+    clone.querySelector(".card span").textContent += product.quantity;
     document.querySelector(".grid-container").appendChild(clone);
+
+    
+    allPrices.push(total);
+}
+
+function totalCart(){
+    const reducer = (previousValue, currentValue) => previousValue + currentValue;
+    return allPrices.reduce(reducer)
 }
 
 function checkRegex(regex, input){
@@ -98,10 +107,12 @@ function main(){
     for(i of array){
         displayProducts(i);
     }
+    document.querySelector(".totalCart").textContent = totalCart();
     listenForm();
 
     document.querySelector(".delete").addEventListener("click", function(){
         localStorage.clear();
+        allPrices = [];
         window.location.href = "index.html";
     });
 }

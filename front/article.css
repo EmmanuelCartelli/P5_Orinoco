@@ -6,13 +6,11 @@ body{
     margin: 0 auto;
 }
 header{
-    display: grid;
-    grid-template-columns: 3fr 1fr;
     background: black;
 }
 nav{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 nav a{
     padding: 2rem;
@@ -100,10 +98,4 @@ footer {
 
 footer h2 {
     color: white;
-}
-
-@media screen and (max-width: 1024px) {
-    .link{
-        grid-template-columns: 1fr;
-    }
 }

@@ -8,8 +8,6 @@ body{
 }
 
 header{
-    display: grid;
-    grid-template-columns: 3fr 1fr;
     background: black;
     box-shadow: 0 0 0.5rem rgb(0 0 0 / 25%);
     position: relative;
@@ -17,7 +15,7 @@ header{
 }
 nav{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 nav a{
     padding: 2rem;
@@ -112,7 +110,7 @@ footer h2 {
     }
 }
 
-@media screen and (max-width: 580px){
+@media screen and (max-width: 650px){
     main{
         grid-template-columns: repeat(1, 1fr);
     }
