@@ -26,6 +26,12 @@ async function main(){
     for(article of products){
         displayProducts(article);
     }
+    document.querySelector(".basket").addEventListener("click",(e)=>{
+        if(!localStorage.getItem("panier")){
+            e.preventDefault();
+            alert("Vous n'avez aucun article dans le panier");
+        }
+    })
 }
 
 main();

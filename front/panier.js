@@ -112,7 +112,6 @@ function main(){
 
     document.querySelector(".delete").addEventListener("click", function(){
         localStorage.clear();
-        allPrices = [];
         window.location.href = "index.html";
     });
 }
