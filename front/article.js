@@ -32,21 +32,22 @@ function displayArticle(articles){
 
 }
 
-
-function pushTotal(articlePrice){
-    let sum = 0;
-    let total = JSON.parse(localStorage.getItem("panier"));
-    if(localStorage.getItem("total")){
-        for(i of total){
-            sum += i.price;
+function incrementBasket(){
+    let articleQuantity = 0;
+    if(localStorage.getItem("panier")){
+        let articles = JSON.parse(localStorage.getItem("panier"));
+        for(article of articles){
+            articleQuantity = articleQuantity +article.quantity;
+            console.log(articleQuantity)
         }
-        localStorage.setItem("total", sum);
     }
     else{
-        sum += articlePrice.price / 100;
-        localStorage.setItem("total", sum);
+        return;
     }
+    let basket = document.querySelector(".basket span");
+    basket.textContent = `${articleQuantity}`;
 }
+
 
 function checkArray(array, itemName, itemOption){
     for(x of array){
@@ -84,17 +85,19 @@ function addToCart(article){
                 if(camera.option === array[i].option && camera.name === array[i].name){
                     array[i].quantity++;
                     localStorage.setItem("panier", JSON.stringify(array));
+                    incrementBasket();
                     return;
                 } 
             }
             array.push(camera);
             localStorage.setItem("panier", JSON.stringify(array));
+            incrementBasket();
         }
         else{
             articleArray.push(camera);
             localStorage.setItem("panier", JSON.stringify(articleArray));
+            incrementBasket();
         }
-        pushTotal(article);
     })
 }
 
@@ -104,6 +107,13 @@ async function main(){
     let article = await getArticle(id);
     displayArticle(article);
     addToCart(article);
+    document.querySelector(".basket").addEventListener("click",(e)=>{
+        if(!localStorage.getItem("panier")){
+            e.preventDefault();
+            alert("Vous n'avez aucun article dans le panier");
+        }
+    })
+    incrementBasket();
 }
 
 main();

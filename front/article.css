@@ -17,7 +17,7 @@ nav a{
     width: fit-content;
     width: -moz-fit-content;
     margin: auto;
-    color: white;;
+    color: white;
 }
 
 h2, h3, h4, a{
@@ -99,3 +99,4 @@ footer {
 footer h2 {
     color: white;
 }
+

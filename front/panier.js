@@ -15,7 +15,7 @@ function displayProducts(product){
     let total = product.price * product.quantity;
     
     clone.querySelector(".card img").setAttribute("src", product.img)
-    clone.querySelector(".card h3").textContent = product.name;
+    clone.querySelector(".card h3").textContent = `${product.name} ${product.option}`;
     clone.querySelector(".card p").textContent = product.description;
     clone.querySelector(".price span").textContent = total;
     clone.querySelector(".card span").textContent += product.quantity;
@@ -102,6 +102,22 @@ function listenForm(){
     });
 }
 
+function incrementBasket(){
+    let articleQuantity = 0;
+    if(localStorage.getItem("panier")){
+        let articles = JSON.parse(localStorage.getItem("panier"));
+        for(article of articles){
+            articleQuantity = articleQuantity +article.quantity;
+            console.log(articleQuantity)
+        }
+    }
+    else{
+        return;
+    }
+    let basket = document.querySelector(".basket span");
+    basket.textContent = `${articleQuantity}`;
+}
+
 function main(){
     let array = getBasket();
     for(i of array){
@@ -114,6 +130,7 @@ function main(){
         localStorage.clear();
         window.location.href = "index.html";
     });
+    incrementBasket();
 }
 
 main();

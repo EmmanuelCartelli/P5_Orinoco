@@ -21,6 +21,22 @@ function displayProducts(articles){
     document.querySelector("main").appendChild(clone);
 }
 
+function incrementBasket(){
+    let articleQuantity = 0;
+    if(localStorage.getItem("panier")){
+        let articles = JSON.parse(localStorage.getItem("panier"));
+        for(article of articles){
+            articleQuantity = articleQuantity +article.quantity;
+            console.log(articleQuantity)
+        }
+    }
+    else{
+        return;
+    }
+    let basket = document.querySelector(".basket span");
+    basket.textContent = `${articleQuantity}`;
+}
+
 async function main(){
     products = await getProducts();
     for(article of products){
@@ -32,6 +48,6 @@ async function main(){
             alert("Vous n'avez aucun article dans le panier");
         }
     })
+    incrementBasket();
 }
-
-main();
+main()
