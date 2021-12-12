@@ -1,3 +1,4 @@
+//récupération des articles dans le panier
 function getBasket(){
     let array = JSON.parse(localStorage.getItem("panier"));
     if(array){
@@ -9,6 +10,7 @@ function getBasket(){
 }
 const allPrices = [];
 
+//affichage des produits
 function displayProducts(product){
     const template = document.querySelector("template");
     const clone = document.importNode(template.content, true);
@@ -25,11 +27,13 @@ function displayProducts(product){
     allPrices.push(total);
 }
 
+//calcul du total du panier
 function totalCart(){
     const reducer = (previousValue, currentValue) => previousValue + currentValue;
     return allPrices.reduce(reducer)
 }
 
+//fonction de test des expressions régulière qui retourne un booléen
 function checkRegex(regex, input){
     if(regex.test(input)){
         return true;
@@ -39,7 +43,7 @@ function checkRegex(regex, input){
     }
 }
 
-
+//Fonction d'écoute du formulaire et methode POST vers l'api
 function listenForm(){
     let submitBtn = document.querySelector(".send");
     const letterFormat = /^[a-zA-ZéêèàëÉÈÊË\-]+$/;
@@ -50,7 +54,6 @@ function listenForm(){
     let city = document.querySelector(".city");
     let nameInput = document.querySelector(".firstname");
     let lastname = document.querySelector(".lastname");
-    console.log(nameInput);
     submitBtn.addEventListener("click", function(e){
         e.preventDefault();
         if(checkRegex(letterFormat, nameInput.value) 
@@ -59,14 +62,11 @@ function listenForm(){
         && checkRegex(adressFormat, city.value) 
         && checkRegex(mailFormat, mail.value)){
             //post method
-            console.log("ok");
             let product = [];
-            let storage = JSON.parse(localStorage.getItem("panier"));
-            console.log(storage);   
+            let storage = JSON.parse(localStorage.getItem("panier")); 
             for(i of storage){
                 product.push(i.id);
             }    
-            console.log(product);
             let order = {
                 contact: {
                     firstName: nameInput.value,
@@ -77,7 +77,6 @@ function listenForm(){
                 },
                 products : product,
             }
-            console.log(order);
             const options = {
                 method: "POST",
                 body: JSON.stringify(order),
@@ -102,22 +101,6 @@ function listenForm(){
     });
 }
 
-function incrementBasket(){
-    let articleQuantity = 0;
-    if(localStorage.getItem("panier")){
-        let articles = JSON.parse(localStorage.getItem("panier"));
-        for(article of articles){
-            articleQuantity = articleQuantity +article.quantity;
-            console.log(articleQuantity)
-        }
-    }
-    else{
-        return;
-    }
-    let basket = document.querySelector(".basket span");
-    basket.textContent = `${articleQuantity}`;
-}
-
 function main(){
     let array = getBasket();
     for(i of array){
@@ -134,3 +117,20 @@ function main(){
 }
 
 main();
+
+//fonctions supplémentaires
+
+function incrementBasket(){
+    let articleQuantity = 0;
+    if(localStorage.getItem("panier")){
+        let articles = JSON.parse(localStorage.getItem("panier"));
+        for(article of articles){
+            articleQuantity = articleQuantity +article.quantity;
+        }
+    }
+    else{
+        return;
+    }
+    let basket = document.querySelector(".basket span");
+    basket.textContent = `${articleQuantity}`;
+}

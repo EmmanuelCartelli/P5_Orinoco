@@ -1,3 +1,4 @@
+//fetch de l'api
 async function getProducts(){
     return fetch(`http://localhost:3000/api/cameras`)
     .then(function(apiResponse){
@@ -8,6 +9,7 @@ async function getProducts(){
     })
 }
 
+//affichage des produits
 function displayProducts(articles){
     const template = document.querySelector("template");
     const clone = document.importNode(template.content, true);
@@ -21,13 +23,13 @@ function displayProducts(articles){
     document.querySelector("main").appendChild(clone);
 }
 
+//Affichage du nombre d'article dans le panier
 function incrementBasket(){
     let articleQuantity = 0;
     if(localStorage.getItem("panier")){
         let articles = JSON.parse(localStorage.getItem("panier"));
         for(article of articles){
-            articleQuantity = articleQuantity +article.quantity;
-            console.log(articleQuantity)
+            articleQuantity = articleQuantity + article.quantity;
         }
     }
     else{
@@ -38,7 +40,7 @@ function incrementBasket(){
 }
 
 async function main(){
-    products = await getProducts();
+    products = await getProducts(); 
     for(article of products){
         displayProducts(article);
     }

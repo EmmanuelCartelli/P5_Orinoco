@@ -1,14 +1,18 @@
 
-let confirmation = document.querySelector('.confirmation').textContent = localStorage.getItem('orderID');
-localStorage.clear();
+let confirmation = document.querySelector('.confirmation').textContent = localStorage.getItem('orderID'); //affiche la réponse du back-end
+localStorage.clear(); //on ne stocke pas la réponse
+
+
+
+
+//fonctions supplémentaires
 
 function incrementBasket(){
         let articleQuantity = 0;
         if(localStorage.getItem("panier")){
             let articles = JSON.parse(localStorage.getItem("panier"));
             for(article of articles){
-                articleQuantity = articleQuantity +article.quantity;
-                console.log(articleQuantity)
+                articleQuantity = articleQuantity + article.quantity;
             }
         }
         else{

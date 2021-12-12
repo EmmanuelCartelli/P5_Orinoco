@@ -1,7 +1,9 @@
+//on recupère l'id du produit dans l'url
 function getId(){
     return new URL(location.href).searchParams.get("id");
 }
 
+//on fetch le produit par son id
 async function getArticle(article){
     return fetch(`http://localhost:3000/api/cameras/${article}`)
     .then(function(apiResponse){
@@ -12,6 +14,7 @@ async function getArticle(article){
     })
 }
 
+//on affiche l'article
 function displayArticle(articles){
     const template = document.querySelector("template");
     const clone = document.importNode(template.content, true);
@@ -32,32 +35,7 @@ function displayArticle(articles){
 
 }
 
-function incrementBasket(){
-    let articleQuantity = 0;
-    if(localStorage.getItem("panier")){
-        let articles = JSON.parse(localStorage.getItem("panier"));
-        for(article of articles){
-            articleQuantity = articleQuantity +article.quantity;
-            console.log(articleQuantity)
-        }
-    }
-    else{
-        return;
-    }
-    let basket = document.querySelector(".basket span");
-    basket.textContent = `${articleQuantity}`;
-}
-
-
-function checkArray(array, itemName, itemOption){
-    for(x of array){
-        if(x.name == itemName && x.option == itemOption){
-            x.quantity++;
-            return true;
-        }
-    }
-}
-
+//fonction d'ajout au panier
 function addToCart(article){
     let articleArray = []
     document.querySelector("button").addEventListener("click", function(){
@@ -72,13 +50,6 @@ function addToCart(article){
         }
         if(localStorage.getItem("panier")){
             let array = JSON.parse(localStorage.getItem("panier"));
-            /*if(checkArray(array, camera.name, camera.option)){
-                localStorage.setItem("panier", JSON.stringify(array));
-            }
-            else{
-                array.push(camera);
-                localStorage.setItem("panier", JSON.stringify(array));
-            }*/
             let z = array.length;
 
             for(i = 0; i < z; i++){
@@ -107,13 +78,31 @@ async function main(){
     let article = await getArticle(id);
     displayArticle(article);
     addToCart(article);
-    document.querySelector(".basket").addEventListener("click",(e)=>{
-        if(!localStorage.getItem("panier")){
-            e.preventDefault();
-            alert("Vous n'avez aucun article dans le panier");
-        }
-    })
     incrementBasket();
 }
 
 main();
+
+
+//fonctions supplémentaires
+
+function incrementBasket(){
+    let articleQuantity = 0;
+    if(localStorage.getItem("panier")){
+        let articles = JSON.parse(localStorage.getItem("panier"));
+        for(article of articles){
+            articleQuantity = articleQuantity +article.quantity;
+        }
+    }
+    else{
+        return;
+    }
+    let basket = document.querySelector(".basket span");
+    basket.textContent = `${articleQuantity}`;
+}
+document.querySelector(".basket").addEventListener("click",(e)=>{
+    if(!localStorage.getItem("panier")){
+        e.preventDefault();
+        alert("Vous n'avez aucun article dans le panier");
+    }
+})
