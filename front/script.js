@@ -1,16 +1,16 @@
 //fetch de l'api
-async function getProducts(){
-    return fetch(`http://localhost:3000/api/cameras`)
-    .then(function(apiResponse){
-        return apiResponse.json()
-    })
-    .catch(function(error){
-        console.log(error)
-    })
+async function getProducts() {
+    return fetch(`https://projet-orinoco.herokuapp.com/api/cameras`)
+        .then(function (apiResponse) {
+            return apiResponse.json()
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
 }
 
 //affichage des produits
-function displayProducts(articles){
+function displayProducts(articles) {
     const template = document.querySelector("template");
     const clone = document.importNode(template.content, true);
 
@@ -24,28 +24,28 @@ function displayProducts(articles){
 }
 
 //Affichage du nombre d'article dans le panier
-function incrementBasket(){
+function incrementBasket() {
     let articleQuantity = 0;
-    if(localStorage.getItem("panier")){
+    if (localStorage.getItem("panier")) {
         let articles = JSON.parse(localStorage.getItem("panier"));
-        for(article of articles){
+        for (article of articles) {
             articleQuantity = articleQuantity + article.quantity;
         }
     }
-    else{
+    else {
         return;
     }
     let basket = document.querySelector(".basket span");
     basket.textContent = `${articleQuantity}`;
 }
 
-async function main(){
-    products = await getProducts(); 
-    for(article of products){
+async function main() {
+    products = await getProducts();
+    for (article of products) {
         displayProducts(article);
     }
-    document.querySelector(".basket").addEventListener("click",(e)=>{
-        if(!localStorage.getItem("panier")){
+    document.querySelector(".basket").addEventListener("click", (e) => {
+        if (!localStorage.getItem("panier")) {
             e.preventDefault();
             alert("Vous n'avez aucun article dans le panier");
         }

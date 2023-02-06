@@ -1,21 +1,21 @@
 //on recupère l'id du produit dans l'url
-function getId(){
+function getId() {
     return new URL(location.href).searchParams.get("id");
 }
 
 //on fetch le produit par son id
-async function getArticle(article){
-    return fetch(`http://localhost:3000/api/cameras/${article}`)
-    .then(function(apiResponse){
-        return apiResponse.json()
-    })
-    .catch(function(error){
-        console.log(error)
-    })
+async function getArticle(article) {
+    return fetch(`https://projet-orinoco.herokuapp.com/api/cameras/${article}`)
+        .then(function (apiResponse) {
+            return apiResponse.json()
+        })
+        .catch(function (error) {
+            console.log(error)
+        })
 }
 
 //on affiche l'article
-function displayArticle(articles){
+function displayArticle(articles) {
     const template = document.querySelector("template");
     const clone = document.importNode(template.content, true);
 
@@ -26,7 +26,7 @@ function displayArticle(articles){
     clone.querySelector(".link span").textContent = articles.price / 100 + "€";
     document.querySelector("main").appendChild(clone);
 
-    for(let i of articles.lenses){
+    for (let i of articles.lenses) {
         let j = document.createElement("option");
         j.setAttribute("value", i);
         j.textContent = i;
@@ -36,35 +36,35 @@ function displayArticle(articles){
 }
 
 //fonction d'ajout au panier
-function addToCart(article){
+function addToCart(article) {
     let articleArray = []
-    document.querySelector("button").addEventListener("click", function(){
+    document.querySelector("button").addEventListener("click", function () {
         let cameraOption = document.querySelector("select").value;
         let camera = {
-            id : article._id,
-            name : article.name,
-            img : article.imageUrl,
-            option : cameraOption,
-            price : article.price / 100,
+            id: article._id,
+            name: article.name,
+            img: article.imageUrl,
+            option: cameraOption,
+            price: article.price / 100,
             quantity: 1
         }
-        if(localStorage.getItem("panier")){
+        if (localStorage.getItem("panier")) {
             let array = JSON.parse(localStorage.getItem("panier"));
             let z = array.length;
 
-            for(i = 0; i < z; i++){
-                if(camera.option === array[i].option && camera.name === array[i].name){
+            for (i = 0; i < z; i++) {
+                if (camera.option === array[i].option && camera.name === array[i].name) {
                     array[i].quantity++;
                     localStorage.setItem("panier", JSON.stringify(array));
                     incrementBasket();
                     return;
-                } 
+                }
             }
             array.push(camera);
             localStorage.setItem("panier", JSON.stringify(array));
             incrementBasket();
         }
-        else{
+        else {
             articleArray.push(camera);
             localStorage.setItem("panier", JSON.stringify(articleArray));
             incrementBasket();
@@ -73,7 +73,7 @@ function addToCart(article){
 }
 
 
-async function main(){
+async function main() {
     let id = getId();
     let article = await getArticle(id);
     displayArticle(article);
@@ -86,22 +86,22 @@ main();
 
 //fonctions supplémentaires
 
-function incrementBasket(){
+function incrementBasket() {
     let articleQuantity = 0;
-    if(localStorage.getItem("panier")){
+    if (localStorage.getItem("panier")) {
         let articles = JSON.parse(localStorage.getItem("panier"));
-        for(article of articles){
-            articleQuantity = articleQuantity +article.quantity;
+        for (article of articles) {
+            articleQuantity = articleQuantity + article.quantity;
         }
     }
-    else{
+    else {
         return;
     }
     let basket = document.querySelector(".basket span");
     basket.textContent = `${articleQuantity}`;
 }
-document.querySelector(".basket").addEventListener("click",(e)=>{
-    if(!localStorage.getItem("panier")){
+document.querySelector(".basket").addEventListener("click", (e) => {
+    if (!localStorage.getItem("panier")) {
         e.preventDefault();
         alert("Vous n'avez aucun article dans le panier");
     }
